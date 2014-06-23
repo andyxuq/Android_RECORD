@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <RelativeLayout
+        android:id="@+id/topbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="0dp"
+        android:background="@color/button_addrecord_bg" >
+
+        <Button
+            android:id="@+id/backpage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="10dp"
+            android:text="@string/add_record_back" />
+
+        <Button
+            android:id="@+id/savepage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:text="@string/add_record_add" />
+    </RelativeLayout>
+
+    <TableLayout
+        android:id="@+id/centertable"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/topbar"
+        android:layout_centerVertical="true"
+        android:shrinkColumns="1"
+        android:stretchColumns="1" >
+
+        <TableRow>
+
+            <TextView android:text="@string/add_record_table_title0" />
+
+            <TextView
+                android:id="@+id/showDateView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            
+        </TableRow>
+
+        <TableRow>
+
+            <TextView android:text="@string/add_record_table_title1" />
+
+            <Spinner android:id="@+id/type" >
+            </Spinner>
+        </TableRow>
+
+        <TableRow>
+
+            <TextView android:text="@string/add_record_table_title2" />
+
+            <EditText
+                android:id="@+id/cost"
+                android:inputType="numberDecimal" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView android:text="@string/add_record_table_title3" />
+
+            <EditText
+                android:id="@+id/note"
+                android:layout_height="250dp"
+                android:gravity="top"
+                android:inputType="text" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView android:text="" />
+
+            <TextView
+                android:id="@+id/suggestnote"
+                android:gravity="top" />
+        </TableRow>
+    </TableLayout>
+
+    <RelativeLayout
+        android:id="@+id/bottombar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="0dp"
+        android:background="@color/button_addrecord_bg" >
+
+        <Button
+            android:id="@+id/backpage_bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="10dp"
+            android:text="@string/add_record_back" />
+
+        <Button
+            android:id="@+id/showrecord"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/add_record_showrecord" />
+
+        <Button
+            android:id="@+id/savepage_bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:text="@string/add_record_add" />
+    </RelativeLayout>
+
+</RelativeLayout>

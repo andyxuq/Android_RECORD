@@ -1,0 +1,55 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/button_addrecord_bg"
+        android:gravity="right" 
+        android:id="@+id/mainTopBar">
+
+        <Button
+            android:id="@+id/addRecord"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/add_record" />
+    </LinearLayout>
+    
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttom_button"
+        android:layout_alignParentBottom="true">
+        <Button android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/button_addrecord_bg"
+            android:text="...laiqi..."/>
+    </LinearLayout>
+    
+    <ScrollView 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/mainTopBar"
+        android:layout_above="@id/buttom_button"
+        > 
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/mainView"
+        
+        android:orientation="vertical"
+        
+        >
+        <!-- <TextView 
+            android:id="@+id/statContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            /> -->        
+    </LinearLayout>
+    </ScrollView>
+    
+    
+
+</RelativeLayout>

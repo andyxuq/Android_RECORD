@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">吊炸天</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+	<string name="add_record">Add Record</string>
+	
+	<string name="add_record_back">BACK</string>
+	<string name="add_record_add">ADD</string>
+	<string name="add_record_showrecord">SHOW_RECORD</string>
+	
+	<string name="add_record_table_title0">Date   :</string>
+	<string name="add_record_table_title1">Type   :</string>
+	<string name="add_record_table_title2">Cost   :</string>
+	<string name="add_record_table_title3">Note   :</string>
+	<color name="button_addrecord_bg">#84CBCC</color>
+	
+	<string-array name="add_record_type">
+	    <item >餐饮</item>
+	    <item >衣物</item>
+	    <item >娱乐</item>
+	    <item >其它</item>
+	</string-array>
+</resources>
