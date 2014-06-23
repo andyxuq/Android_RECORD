@@ -7,7 +7,7 @@ import android.app.Activity;
 import android.app.Application;
 
 /**
- * 为Activity程序完全退出提供解决方案
+ * 为Activity程序完全退出提供解决方案    
  * @author Administrator
  *
  */
