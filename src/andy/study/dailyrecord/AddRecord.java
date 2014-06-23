@@ -45,6 +45,9 @@ public class AddRecord extends Activity{
 	private Button showRecord_button;
 	private EditText costText;
 	private EditText noteText;
+	
+	
+	
 	private TextView suggestView;
 	
 	private TextView showDateView;
