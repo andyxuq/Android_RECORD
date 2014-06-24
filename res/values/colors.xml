@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="button_addrecord_bg">#84CBCC</color>
+    <color name="cost_today_tcolor">#ffffff</color>
+</resources>

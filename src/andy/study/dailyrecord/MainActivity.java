@@ -67,15 +67,15 @@ public class MainActivity extends Activity {
     }
 
     public void initMainTextView() {
-    	for (int i=0;i<10;i++) {
-	    	TextView textView = new TextView(this);
-	    	textView.setText("what's the fuck...");
-	    	LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-	    	textView.setLayoutParams(layoutParams);
-	    	textView.setBackgroundColor(Color.RED);
-	    	textView.setTextSize(50);
-	    	mainTextView.addView(textView);
-    	}
+//    	for (int i=0;i<10;i++) {
+//	    	TextView textView = new TextView(this);
+//	    	textView.setText("what's the fuck...");
+//	    	LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+//	    	textView.setLayoutParams(layoutParams);
+//	    	textView.setBackgroundColor(Color.RED);
+//	    	textView.setTextSize(50);
+//	    	mainTextView.addView(textView);
+//    	}
     }
 
     @Override
