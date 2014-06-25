@@ -12,6 +12,10 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.text.Html;
+import android.text.Html.ImageGetter;
+import android.text.Spanned;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -32,7 +36,8 @@ public class MainActivity extends Activity {
 	
 	private DataManager dm;
 	
-	private LinearLayout mainTextView;
+	private TextView costTodayTitle;
+	
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +46,7 @@ public class MainActivity extends Activity {
         ActivityAgent.getInstance().addActivity(this);
         
         dm = new DataManager(this);
-        mainTextView = (LinearLayout) this.findViewById(R.id.mainView);
+        costTodayTitle = (TextView) this.findViewById(R.id.cost_today_title);
         button = (Button)this.findViewById(R.id.addRecord);
         button.setOnClickListener(new View.OnClickListener() {			
 			@Override
@@ -67,17 +72,22 @@ public class MainActivity extends Activity {
     }
 
     public void initMainTextView() {
-//    	for (int i=0;i<10;i++) {
-//	    	TextView textView = new TextView(this);
-//	    	textView.setText("what's the fuck...");
-//	    	LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-//	    	textView.setLayoutParams(layoutParams);
-//	    	textView.setBackgroundColor(Color.RED);
-//	    	textView.setTextSize(50);
-//	    	mainTextView.addView(textView);
-//    	}
+    	String text = "<img src='" +R.drawable.before_cost_title+ "' />" + getResources().getString(R.string.cost_today_title);
+    	Spanned costTitleHtml = Html.fromHtml(text, imageGetter, null);
+    	costTodayTitle.setText(costTitleHtml);
     }
 
+    ImageGetter imageGetter = new Html.ImageGetter() {
+		
+		@Override
+		public Drawable getDrawable(String arg0) {
+			int rId=Integer.parseInt(arg0);
+		    Drawable drawable=getResources().getDrawable(rId);
+		    drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
+		    return drawable;
+		}
+	};
+    
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);

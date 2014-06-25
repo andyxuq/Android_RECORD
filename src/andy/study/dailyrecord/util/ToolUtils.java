@@ -12,5 +12,5 @@ public class ToolUtils {
 	
 	public static void main(String[] args) {
 		System.out.println(getDateBySpecFormat("yyyy-MM-dd"));    //
-	}
+	}	
 }

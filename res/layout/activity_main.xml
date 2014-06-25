@@ -49,21 +49,49 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/cost_todaybg"                
                 android:orientation="vertical">
+                
                 <TextView android:layout_width="match_parent"
                     android:layout_height="wrap_content"                    
                     android:layout_marginLeft="15dp"
                     android:layout_marginTop="20dp"
                     android:textSize="15sp"
+                    android:id="@+id/cost_today_title"
                     android:textColor="@color/cost_today_tcolor"                    
-                    android:text="@string/cost_today_title"/>
+                    />
                 <TextView android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/costTodayCost"                                            
-                    android:layout_marginLeft="15dp"      
+                    android:layout_marginLeft="13dp"      
                     android:textSize="40sp"
                     android:textColor="@color/cost_today_tcolor"           
                     android:text="@string/cost_today_title_cost"/>
             </LinearLayout>
+            
+            <TableLayout 
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"                
+                >
+                <TableRow android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginLeft="15dp"
+                        android:text="@string/cost_total_title"
+                        android:textColor="@color/cost_total_tcolor"/>                    
+                </TableRow>                
+                <TableRow android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+                    <TextView android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="13dp"
+                        android:textSize="40sp"
+                        android:textColor="@color/cost_total_color"
+                        android:text="@string/cost_total"
+                        />
+                </TableRow>
+            </TableLayout>
         </LinearLayout>
     </ScrollView>
 

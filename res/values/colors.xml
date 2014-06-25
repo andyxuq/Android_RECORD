@@ -2,4 +2,6 @@
 <resources>
     <color name="button_addrecord_bg">#84CBCC</color>
     <color name="cost_today_tcolor">#ffffff</color>
+    <color name="cost_total_tcolor">#A09C9C</color>
+    <color name="cost_total_color">#FD6138</color>
 </resources>

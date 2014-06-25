@@ -17,6 +17,8 @@
 	
 	<string name="cost_today_title">当日共消费（元）</string>
 	<string name="cost_today_title_cost">暂无收益</string>
+	<string name="cost_total_title">总共消费（元）</string>
+	<string name="cost_total">290,302.32</string>
 	
 	<string-array name="add_record_type">
 	    <item >餐饮</item>
