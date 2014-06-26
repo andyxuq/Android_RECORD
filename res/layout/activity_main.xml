@@ -4,10 +4,11 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity" >
 
+    <!-- 顶部 -->
     <LinearLayout
         android:id="@+id/mainTopBar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"        
+        android:layout_height="wrap_content"
         android:background="@drawable/main_titlebg"
         android:gravity="right" >
 
@@ -18,6 +19,7 @@
             android:text="@string/add_record" />
     </LinearLayout>
 
+    <!-- 底部-->
     <LinearLayout
         android:id="@+id/buttom_button"
         android:layout_width="match_parent"
@@ -27,69 +29,243 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/button_addrecord_bg"
-            android:text="...laiqi..." />
+            android:background="@color/cost_today_tcolor"
+            android:text="@string/add_record_new"
+            android:textColor="@color/add_record_new" />
     </LinearLayout>
-
+	<!-- 中部-->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@id/buttom_button"
         android:layout_below="@id/mainTopBar" >
-
+		<!-- 红色背景部分 -->
         <LinearLayout
             android:id="@+id/mainView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="wrap_content"            
             android:orientation="vertical" >
 
             <LinearLayout
-                android:id="@+id/costToday"                
+                android:id="@+id/costToday"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/cost_todaybg"                
-                android:orientation="vertical">
-                
-                <TextView android:layout_width="match_parent"
-                    android:layout_height="wrap_content"                    
+                android:background="@drawable/cost_todaybg"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/cost_today_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
                     android:layout_marginTop="20dp"
-                    android:textSize="15sp"
-                    android:id="@+id/cost_today_title"
-                    android:textColor="@color/cost_today_tcolor"                    
-                    />
-                <TextView android:layout_width="match_parent"
+                    android:textColor="@color/cost_today_tcolor"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/costTodayCost"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/costTodayCost"                                            
-                    android:layout_marginLeft="13dp"      
-                    android:textSize="40sp"
-                    android:textColor="@color/cost_today_tcolor"           
-                    android:text="@string/cost_today_title_cost"/>
+                    android:layout_marginLeft="13dp"
+                    android:layout_marginTop="10dp"
+                	android:layout_marginBottom="20dp"
+                    android:text="@string/cost_today_title_cost"
+                    android:textColor="@color/cost_today_tcolor"
+                    android:textSize="45sp" />
             </LinearLayout>
-            
-            <TableLayout 
+			<!-- 总共消费部分 -->
+            <TableLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"                
-                >
-                <TableRow android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <TextView android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="30dp"
                         android:layout_marginLeft="15dp"
+                        android:layout_marginTop="30dp"
                         android:text="@string/cost_total_title"
-                        android:textColor="@color/cost_total_tcolor"/>                    
-                </TableRow>                
-                <TableRow android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    >
-                    <TextView android:layout_width="match_parent"
+                        android:textColor="@color/cost_total_tcolor" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="13dp"
-                        android:textSize="40sp"
-                        android:textColor="@color/cost_total_color"
                         android:text="@string/cost_total"
-                        />
+                        android:layout_marginBottom="30dp"
+                        android:textColor="@color/cost_total_color"
+                        android:textSize="40sp" />
+                </TableRow>
+            </TableLayout>
+			<!-- 总结消费部分 -->
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/cost_summary_color" >
+				
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+
+                    <TableLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:layout_weight="1" >
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" >
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="15dp"
+                                android:layout_weight="1"
+                                android:text="@string/cost_summary_weekt"
+                                android:textColor="@color/cost_summary_title"
+                                android:textSize="15sp" />
+                        </TableRow>
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" >
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="15dp"
+                                android:layout_weight="1"
+                                android:text="@string/cost_summary_week"
+                                android:textColor="@color/cost_summary_value"
+                                android:textSize="25sp" >
+                            </TextView>
+                        </TableRow>
+                    </TableLayout>
+
+                    <TableLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/summary_spliterx" >
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" >
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="15dp"
+                                android:layout_weight="1"
+                                android:text="@string/cost_summary_montht"
+                                android:textColor="@color/cost_summary_title"
+                                android:textSize="15sp" />
+                        </TableRow>
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" >
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="15dp"
+                                android:layout_weight="1"
+                                android:text="@string/cost_summary_month"
+                                android:textColor="@color/cost_summary_value"
+                                android:textSize="25sp" >
+                            </TextView>
+                        </TableRow>
+                    </TableLayout>
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+
+                    <TableLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginBottom="15dp"
+                        android:layout_weight="1" >
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" >
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="15dp"
+                                android:layout_weight="1"
+                                android:text="@string/cost_summary_hyeart"
+                                android:textColor="@color/cost_summary_title"
+                                android:textSize="15sp" />
+                        </TableRow>
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" >
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="15dp"
+                                android:layout_weight="1"
+                                android:text="@string/cost_summary_hyear"
+                                android:textColor="@color/cost_summary_value"
+                                android:textSize="25sp" >
+                            </TextView>
+                        </TableRow>
+                    </TableLayout>
+
+                    <TableLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/summary_spliterx" >
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" >
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="15dp"
+                                android:layout_weight="1"
+                                android:text="@string/cost_summary_yeart"
+                                android:textColor="@color/cost_summary_title"
+                                android:textSize="15sp" />
+                        </TableRow>
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" >
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="15dp"
+                                android:layout_weight="1"
+                                android:text="@string/cost_summary_year"
+                                android:textColor="@color/cost_summary_value"
+                                android:textSize="25sp" >
+                            </TextView>
+                        </TableRow>
+                    </TableLayout>
                 </TableRow>
             </TableLayout>
         </LinearLayout>

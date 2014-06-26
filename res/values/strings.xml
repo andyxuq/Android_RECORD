@@ -9,6 +9,7 @@
 	<string name="add_record_back">BACK</string>
 	<string name="add_record_add">ADD</string>
 	<string name="add_record_showrecord">SHOW_RECORD</string>
+	<string name="add_record_new">添加记录</string>
 	
 	<string name="add_record_table_title0">Date   :</string>
 	<string name="add_record_table_title1">Type   :</string>
@@ -19,6 +20,15 @@
 	<string name="cost_today_title_cost">暂无收益</string>
 	<string name="cost_total_title">总共消费（元）</string>
 	<string name="cost_total">290,302.32</string>
+	
+	<string name="cost_summary_weekt">本周消费（元）</string>
+	<string name="cost_summary_week">23.32</string>
+	<string name="cost_summary_montht">本月消费（元）</string>
+	<string name="cost_summary_month">2392.32</string>
+	<string name="cost_summary_hyeart">半年消费（元）</string>
+	<string name="cost_summary_hyear">16,392.32</string>
+	<string name="cost_summary_yeart">本年消费（元）</string>
+	<string name="cost_summary_year">32,392.32</string>
 	
 	<string-array name="add_record_type">
 	    <item >餐饮</item>

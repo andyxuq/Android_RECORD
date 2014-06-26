@@ -4,4 +4,10 @@
     <color name="cost_today_tcolor">#ffffff</color>
     <color name="cost_total_tcolor">#A09C9C</color>
     <color name="cost_total_color">#FD6138</color>
+    
+    <color name="add_record_new">#148EDA</color>
+    
+    <color name="cost_summary_color">#ECEDEE</color>    
+    <color name="cost_summary_title">#9F9FA9</color>
+   	<color name="cost_summary_value">#726F83</color>
 </resources>
