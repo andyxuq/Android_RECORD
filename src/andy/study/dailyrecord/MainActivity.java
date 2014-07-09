@@ -22,9 +22,11 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TableRow;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 import android.widget.Toast;
+import andy.study.dailyrecord.chart.MainCostChart;
 import andy.study.dailyrecord.dao.DataManager;
 import andy.study.dailyrecord.model.Record;
 import andy.study.dailyrecord.util.ActivityAgent;
@@ -38,6 +40,9 @@ public class MainActivity extends Activity {
 	
 	private TextView costTodayTitle;
 	
+	private MainCostChart mcc;
+	
+	private LinearLayout chartContainer;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +61,8 @@ public class MainActivity extends Activity {
 			}
 		});
         
-        initMainTextView();        
+        initMainTextView(); 
+        initChartView();
         // 查询已添加项
 //        List<Map<String, Object>> recordList = dm.findRecord("SELECT * from " + ConfigLoader.RECORD_TABLE, null);
 //        for (Map<String, Object> map : recordList) {
@@ -71,7 +77,20 @@ public class MainActivity extends Activity {
         
     }
 
-    public void initMainTextView() {
+    /**
+     * 设置图表
+     */
+    public void initChartView() {
+    	mcc = new MainCostChart();
+    	chartContainer = (LinearLayout) this.findViewById(R.id.chartRow);    	
+		View chartView = mcc.executeWithView(this);
+		
+		chartContainer.addView(chartView, LayoutParams.WRAP_CONTENT, 500);
+	}
+    
+    
+
+	public void initMainTextView() {
     	String text = "<img src='" +R.drawable.before_cost_title+ "' />" + getResources().getString(R.string.cost_today_title);
     	Spanned costTitleHtml = Html.fromHtml(text, imageGetter, null);
     	costTodayTitle.setText(costTitleHtml);

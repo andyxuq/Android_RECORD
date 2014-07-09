@@ -30,6 +30,7 @@
 	<string name="cost_summary_yeart">本年消费（元）</string>
 	<string name="cost_summary_year">32,392.32</string>
 	
+	<string name="cost_chart_title">近7天消费记录</string>
 	<string-array name="add_record_type">
 	    <item >餐饮</item>
 	    <item >衣物</item>
