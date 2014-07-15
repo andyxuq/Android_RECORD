@@ -1,6 +1,7 @@
 package andy.study.dailyrecord.dao;
 
 import java.lang.reflect.Field;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -186,7 +187,8 @@ public class DataManager {
 					if (currentField.getType() == int.class || currentField.getType() == Integer.class) {
 						currentField.setInt(record, Integer.parseInt(value == null ? "0":value));
 					} else if (currentField.getType() == float.class || currentField.getType() == Double.class) {
-						currentField.setFloat(record, Float.parseFloat(value == null ? "0":value));
+						DecimalFormat format = new DecimalFormat("#.00");
+						currentField.setFloat(record, Float.parseFloat(format.format(value == null ? "0":value)));
 					} else if (currentField.getType() == boolean.class || currentField.getType() == Boolean.class) {
 						currentField.setBoolean(record, Boolean.parseBoolean(value == null ? "false":value));
 					} else {

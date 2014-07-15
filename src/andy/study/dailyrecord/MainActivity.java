@@ -1,9 +1,5 @@
 package andy.study.dailyrecord;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -11,24 +7,22 @@ import java.util.concurrent.TimeUnit;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.text.Html;
 import android.text.Html.ImageGetter;
 import android.text.Spanned;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.TableRow;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 import android.widget.Toast;
 import andy.study.dailyrecord.chart.MainCostChart;
 import andy.study.dailyrecord.dao.DataManager;
-import andy.study.dailyrecord.model.Record;
 import andy.study.dailyrecord.util.ActivityAgent;
 import andy.study.dailyrecord.util.ConfigLoader;
 
@@ -43,6 +37,8 @@ public class MainActivity extends Activity {
 	private MainCostChart mcc;
 	
 	private LinearLayout chartContainer;
+	
+	private Button buttomButton;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,33 +58,45 @@ public class MainActivity extends Activity {
 		});
         
         initMainTextView(); 
-        initChartView();
-        // 查询已添加项
-//        List<Map<String, Object>> recordList = dm.findRecord("SELECT * from " + ConfigLoader.RECORD_TABLE, null);
-//        for (Map<String, Object> map : recordList) {
-//        	Iterator<Entry<String, Object>> iterator = map.entrySet().iterator();
-//        	String content = "";
-//        	while (iterator.hasNext()) {
-//        		Entry<String, Object> next = iterator.next();
-//        		content += next.getKey() + "=" + next.getValue() + ",";
-//        	}
-//        	Log.i(ConfigLoader.TAG, content);
-//        }
-        
+        initChartView();     
     }
 
-    /**
+    
+    private int widthPixels;
+    private int heightPixels;
+    
+    public int getWidthPixels() {
+		return widthPixels;
+	}
+	public int getHeightPixels() {
+		return heightPixels;
+	}
+	/**
      * 设置图表
      */
     public void initChartView() {
     	mcc = new MainCostChart();
-    	chartContainer = (LinearLayout) this.findViewById(R.id.chartRow);    	
+    	//获取屏幕高度
+    	DisplayMetrics dm = new DisplayMetrics();
+		getWindowManager().getDefaultDisplay().getMetrics(dm);
+		
+		widthPixels = dm.widthPixels;
+		heightPixels = dm.heightPixels;
+    	chartContainer = (LinearLayout) this.findViewById(R.id.chartRow);   
+    	buttomButton = (Button) this.findViewById(R.id.buttomForward);
 		View chartView = mcc.executeWithView(this);
 		
-		chartContainer.addView(chartView, LayoutParams.WRAP_CONTENT, 500);
+		 
+		chartContainer.addView(chartView, LayoutParams.WRAP_CONTENT, heightPixels/4);
+		buttomButton.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				Intent intent = new Intent(MainActivity.this, AddRecord.class);
+				startActivity(intent);
+			}
+		});
 	}
-    
-    
 
 	public void initMainTextView() {
     	String text = "<img src='" +R.drawable.before_cost_title+ "' />" + getResources().getString(R.string.cost_today_title);

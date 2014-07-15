@@ -27,6 +27,7 @@
         android:layout_alignParentBottom="true" >
 
         <Button
+            android:id="@+id/buttomForward"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/cost_today_tcolor"
