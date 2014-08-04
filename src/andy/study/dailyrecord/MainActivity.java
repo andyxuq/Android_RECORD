@@ -1,5 +1,6 @@
 package andy.study.dailyrecord;
 
+import java.text.ParseException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -25,6 +26,7 @@ import andy.study.dailyrecord.chart.MainCostChart;
 import andy.study.dailyrecord.dao.DataManager;
 import andy.study.dailyrecord.util.ActivityAgent;
 import andy.study.dailyrecord.util.ConfigLoader;
+import andy.study.dailyrecord.util.ToolUtils;
 
 public class MainActivity extends Activity {
 
@@ -57,8 +59,46 @@ public class MainActivity extends Activity {
 			}
 		});
         
-        initMainTextView(); 
-        initChartView();     
+        initMainTextView();
+        getCostedValues();
+        initChartView();        
+    }
+    
+    /** 获取以往消费记录 */
+    public void getCostedValues() {
+    	try {
+	    	//当日消费记录
+	    	String sql = "select sum(record_value) from t_daily_record t where datetime(t.recorddate) = datetime(?)";
+	    	String[] args = new String[]{ToolUtils.getDateBySpecFormat("yyyy-MM-dd")};
+	    	Object costToday = dm.findRecordForObject(sql, args);
+	    	
+	    	//总消费记录
+	    	sql = "select sum(record_value) from t_daily_record t ";
+	    	Object costAll = dm.findRecordForObject(sql, null);
+	    	
+	    	//本周消费
+	    	sql = "select sum(record_value) from t_daily_record t where datetime(t.recorddated) >= datetime(?) and datetime(t.recorddate) <= datetime(?)";
+	    	String[] weekArgs = new String[]{ToolUtils.getMondayOfWeek(null), ToolUtils.getSundayOfWeek(null)};
+	    	Object costWeek = dm.findRecordForObject(sql, weekArgs);
+	    	
+	    	//本月消费
+	    	String[] monthArgs = new String[]{ToolUtils.getFirstDayOfMonth(null), ToolUtils.getLastDayOfMonth(null)};
+	    	Object costMonth = dm.findRecordForObject(sql, monthArgs);
+	    	
+	    	//半年消费
+	    	String[] halfArgs = new String[]{ToolUtils.getfirstDayOfHalfYear(), ToolUtils.getLastDayOfHalfYear()};
+	    	Object costHalf = dm.findRecordForObject(sql, halfArgs);
+	    	
+	    	//一年消费
+	    	String[] yearArgs = new String[]{ToolUtils.getFirstDayOfYear(), ToolUtils.getLastDayOfYear()};
+	    	Object costYear = dm.findRecordForObject(sql, yearArgs);
+	    	
+	    	Log.i(ConfigLoader.TAG, "today:" + costToday + ", total:" + costAll + ", week:" + costWeek + ", month:" + costMonth + "" +
+	    			", half:" + costHalf + ", year:" + costYear);
+    	} catch (ParseException e) {
+    		e.printStackTrace();
+    		Toast.makeText(this, "Bad Info:获取记录出错", Toast.LENGTH_LONG).show();
+    	}
     }
 
     

@@ -14,7 +14,7 @@ public class Record {
 	
 	private int sum_id;
 	
-	private float record_value;
+	private double record_value;
 	
 	private String note;
 	
@@ -58,11 +58,11 @@ public class Record {
 		this.sum_id = sum_id;
 	}
 
-	public float getRecord_value() {
+	public double getRecord_value() {
 		return record_value;
 	}
 
-	public void setRecord_value(float record_value) {
+	public void setRecord_value(double record_value) {
 		this.record_value = record_value;
 	}
 
