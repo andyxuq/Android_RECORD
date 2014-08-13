@@ -188,7 +188,7 @@ public class DataManager {
 						currentField.setInt(record, Integer.parseInt(value == null ? "0":value));
 					} else if (currentField.getType() == Double.class || currentField.getType() == double.class) {
 						DecimalFormat format = new DecimalFormat("#.00");
-						currentField.setDouble(record, Double.parseDouble(format.format(value == null ? "0":value)));
+						currentField.setDouble(record, Double.parseDouble(format.format(Double.parseDouble(value == null ? "0":value))));
 					} else if (currentField.getType() == boolean.class || currentField.getType() == Boolean.class) {
 						currentField.setBoolean(record, Boolean.parseBoolean(value == null ? "false":value));
 					} else {

@@ -1,6 +1,8 @@
 package andy.study.dailyrecord;
 
 import java.text.ParseException;
+import java.util.Collections;
+import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -24,6 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import andy.study.dailyrecord.chart.MainCostChart;
 import andy.study.dailyrecord.dao.DataManager;
+import andy.study.dailyrecord.model.Record;
 import andy.study.dailyrecord.util.ActivityAgent;
 import andy.study.dailyrecord.util.ConfigLoader;
 import andy.study.dailyrecord.util.ToolUtils;
@@ -61,7 +64,7 @@ public class MainActivity extends Activity {
         
         initMainTextView();
         getCostedValues();
-        initChartView();        
+//        initChartView();        
     }
     
     /** 获取以往消费记录 */
@@ -77,7 +80,7 @@ public class MainActivity extends Activity {
 	    	Object costAll = dm.findRecordForObject(sql, null);
 	    	
 	    	//本周消费
-	    	sql = "select sum(record_value) from t_daily_record t where datetime(t.recorddated) >= datetime(?) and datetime(t.recorddate) <= datetime(?)";
+	    	sql = "select sum(record_value) from t_daily_record t where datetime(t.recorddate) >= datetime(?) and datetime(t.recorddate) <= datetime(?)";
 	    	String[] weekArgs = new String[]{ToolUtils.getMondayOfWeek(null), ToolUtils.getSundayOfWeek(null)};
 	    	Object costWeek = dm.findRecordForObject(sql, weekArgs);
 	    	
@@ -95,6 +98,20 @@ public class MainActivity extends Activity {
 	    	
 	    	Log.i(ConfigLoader.TAG, "today:" + costToday + ", total:" + costAll + ", week:" + costWeek + ", month:" + costMonth + "" +
 	    			", half:" + costHalf + ", year:" + costYear);
+	    	
+	    	//查找近7天记录
+	    	sql = "select a.recorddate, sum(a.record_value) record_value from (select t.recorddate, t.record_value from t_daily_record t order by t.recorddate desc limit 0, 50 )a group by a.recorddate order by a.recorddate desc limit 0, 7";
+	    	List<Record> sevenRecords = dm.findRecordBean(sql, null);
+	    	Collections.reverse(sevenRecords);
+	    	String[] dateArray = new String[sevenRecords.size()];
+	    	double[] valueArray = new double[sevenRecords.size()];
+	    	int i = 0;
+	    	for (Record record : sevenRecords) {
+	    		dateArray[i] = record.getRecorddate();
+	    		valueArray[i] = record.getRecord_value();
+	    		i++;
+	    	}
+	        initChartView(dateArray, valueArray);
     	} catch (ParseException e) {
     		e.printStackTrace();
     		Toast.makeText(this, "Bad Info:获取记录出错", Toast.LENGTH_LONG).show();
@@ -114,8 +131,8 @@ public class MainActivity extends Activity {
 	/**
      * 设置图表
      */
-    public void initChartView() {
-    	mcc = new MainCostChart();
+    public void initChartView(String[] dateArray, double[] valueArray) {
+    	mcc = new MainCostChart(valueArray, dateArray);
     	//获取屏幕高度
     	DisplayMetrics dm = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(dm);

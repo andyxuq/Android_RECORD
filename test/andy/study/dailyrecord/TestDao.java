@@ -1,8 +1,12 @@
 package andy.study.dailyrecord;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import android.test.AndroidTestCase;
 import android.util.Log;
@@ -22,6 +26,34 @@ public class TestDao extends AndroidTestCase{
 		map.put(ConfigLoader.TABLE_NAME_KEY, ConfigLoader.RECORD_TABLE);
 		
 		Log.i(ConfigLoader.TAG, "insert result:	" + dataDao.addRecord(map));
+	}
+	
+	public void batchAddRecord() throws ParseException {
+		DataManager dataDao = new DataManager(getContext());
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		Calendar cal = Calendar.getInstance();
+		
+		String date = "2014-08-13";
+		cal.setTime(format.parse(date));
+		for (int i=0;i<365;i++) {			
+			cal.add(Calendar.DAY_OF_YEAR, -1);
+			Random random = new Random();
+			int randomType = random.nextInt(5) + 1;
+			String recordDate = format.format(cal.getTime());
+			
+			Record record = new Record();
+			Map<String, Object> map = ConfigLoader.SPINNER_LIST.get(randomType);
+			int typeid = Integer.parseInt(map.get("type_id").toString());
+			String typeName = map.get("type_name").toString();
+			record.setType_id(typeid);
+			record.setType_name(typeName);
+			
+			record.setNote("买了" + typeName);
+			record.setRecord_value(2);
+			record.setRecorddate(recordDate);
+			dataDao.addRecordByBean(record);
+			Log.i(ConfigLoader.TAG, recordDate + "==》" + record.toString());
+		}
 	}
 	
 	public void insertRecordByBean() {

@@ -1,6 +1,8 @@
 package andy.study.dailyrecord.chart;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.achartengine.ChartFactory;
@@ -27,16 +29,28 @@ public class MainCostChart extends AbstractDemoChart {
 	public String getDesc() {
 		return "MainCostChart";
 	}
+	
+	public double[] xArray;
+	public double[] valueArray;
+	public String[] dateArray;
+	
+	public MainCostChart(double[] valueArray, String[] dateArray) {
+		this.valueArray = valueArray;
+		this.dateArray = dateArray;
+		xArray = new double[dateArray.length];
+		for (int i=0;i<dateArray.length;i++) {
+			xArray[i] = i;
+		}
+	}
 
 	@Override
 	public View executeWithView(Context context) {
-		String[] titles = new String[] {"收益图标"};
+		String[] titles = new String[] {"收益图表"};
 		List<double[]> x = new ArrayList<double[]>();
-		x.add(new double[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 });
+		x.add(xArray);
 
 		List<double[]> values = new ArrayList<double[]>();
-		values.add(new double[] { 23, 12.3, 12.5, 13.8, 16.8, 20.4, 24.4, 26.4,
-				26.1, 23.6, 20.3, 17.2, 13.9 });
+		values.add(valueArray);
 
 		int[] colors = new int[] { context.getResources().getColor(R.color.cost_chart_line) };
 		PointStyle[] styles = new PointStyle[] { PointStyle.CIRCLE };
@@ -46,10 +60,20 @@ public class MainCostChart extends AbstractDemoChart {
 			((XYSeriesRenderer) renderer.getSeriesRendererAt(i))
 					.setFillPoints(true);
 		}
-		setChartSettings(renderer, "近7天消费记录", "Month", "Temperature", 0, 14,
-				10, 30, context.getResources().getColor(R.color.cost_today_tcolor)
+		
+		double valueMin = 0, valueMax = 0;
+		if (valueArray.length == 0) {
+			valueMin = 0;
+			valueMax = 10;
+		} else {
+			Arrays.sort(valueArray);
+			valueMin = valueArray[0];
+			valueMax = valueArray[valueArray.length - 1] + 10;
+		}
+		setChartSettings(renderer, "近7天消费记录", "日期", "金额", 1, 7,
+				valueMin, valueMax, context.getResources().getColor(R.color.cost_today_tcolor)
 				, Color.GRAY); // 设置X,Y坐标最大值
-		renderer.setXLabels(12);
+		renderer.setXLabels(1);
 		renderer.setYLabels(10);
 		renderer.setApplyBackgroundColor(true);
 		renderer.setBackgroundColor(context.getResources().getColor(
@@ -60,10 +84,14 @@ public class MainCostChart extends AbstractDemoChart {
 		renderer.setShowLegend(false);       //显示图标下方说明
 		//隐藏X轴坐标坐标显示，并设置每一个位置的标签（实现自定义X轴坐标的功能）
 		renderer.setXLabels(0);
-		renderer.addXTextLabel(1, "测试");
-		renderer.addXTextLabel(1, "测试1");
-		renderer.addXTextLabel(1, "测试2");
-		renderer.addXTextLabel(1, "测试3");		
+		for (double xValue : xArray) {
+			int value = (int)xValue;
+			renderer.addXTextLabel(value, dateArray[value]);
+		}
+//		renderer.addXTextLabel(1, "测试");
+//		renderer.addXTextLabel(2, "测试1");
+//		renderer.addXTextLabel(3, "测试2");
+//		renderer.addXTextLabel(4, "测试3");		
 		// renderer.setXTitle("goods test"); //设置X轴标题
 		
 		// renderer.setDisplayValues(true);
