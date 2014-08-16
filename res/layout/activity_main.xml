@@ -97,13 +97,15 @@
                     android:layout_height="wrap_content" >
 
                     <TextView
+                        android:id="@+id/costAllTotal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="30dp"
                         android:layout_marginLeft="13dp"
                         android:text="@string/cost_total"
-                        android:layout_marginBottom="30dp"
                         android:textColor="@color/cost_total_color"
                         android:textSize="40sp" />
+
                 </TableRow>
             </TableLayout>
 			<!-- 总结消费部分 -->
@@ -141,6 +143,7 @@
                             android:layout_height="match_parent" >
 
                             <TextView
+                                android:id="@+id/costSummaryWeek"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="15dp"
@@ -178,6 +181,7 @@
                             android:layout_height="match_parent" >
 
                             <TextView
+                                android:id="@+id/costSummaryMonth"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="15dp"
@@ -220,6 +224,7 @@
                             android:layout_height="match_parent" >
 
                             <TextView
+                                android:id="@+id/costSummaryHYear"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="15dp"
@@ -257,6 +262,7 @@
                             android:layout_height="match_parent" >
 
                             <TextView
+                                android:id="@+id/costSummaryYear"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="15dp"

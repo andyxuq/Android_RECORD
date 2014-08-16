@@ -33,7 +33,7 @@ public class TestDao extends AndroidTestCase{
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		Calendar cal = Calendar.getInstance();
 		
-		String date = "2014-08-13";
+		String date = "2014-08-16";
 		cal.setTime(format.parse(date));
 		for (int i=0;i<365;i++) {			
 			cal.add(Calendar.DAY_OF_YEAR, -1);

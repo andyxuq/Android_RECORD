@@ -1,10 +1,13 @@
 package andy.study.dailyrecord.util;
 
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+
+import android.widget.TextView;
 
 public class ToolUtils {
 
@@ -142,6 +145,45 @@ public class ToolUtils {
 		cal.set(Calendar.MONTH, Calendar.DECEMBER);
 		cal.set(Calendar.DAY_OF_MONTH, 31);			
 		return format.format(cal.getTime());
+	}
+	
+	public static void setViewText(TextView view, Object cost) {
+		String result = getCostString(cost);
+		if ("" != result) {
+			view.setText(result);
+		}
+	}
+	
+	public static String getCostString(Object cost) {
+		String result = "";		
+		if (null != cost && !cost.equals("")) {			
+			String costString = cost.toString();			
+			String subfix = "";
+			String prefix = costString;
+			
+			if (costString.contains(".")) {
+				subfix = costString.substring(costString.indexOf("."));
+				prefix = costString.substring(0, costString.indexOf("."));
+			}
+			char[] preArray = new StringBuilder(prefix).reverse().toString().toCharArray();
+			StringBuilder preBuilder = new StringBuilder();
+			for (int i=0; i<preArray.length; i++) {			
+				if (i%3 == 0 && i != 0) {
+					preBuilder.append(",");
+				} 
+				preBuilder.append(preArray[i]);
+			}
+			
+			result = preBuilder.reverse().toString();
+			if (result.startsWith(",")) {
+				result = result.substring(1);
+			}
+			if (result.endsWith(",")) {
+				result = result.substring(0, result.lastIndexOf(","));
+			}
+			result = result + subfix;									
+		}
+		return result;
 	}
 	
 	public static void main(String[] args) {

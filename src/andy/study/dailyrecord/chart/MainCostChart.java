@@ -15,8 +15,10 @@ import org.achartengine.renderer.XYSeriesRenderer.FillOutsideLine;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Paint.Align;
+import android.util.Log;
 import android.view.View;
 import andy.study.dailyrecord.R;
+import andy.study.dailyrecord.util.ConfigLoader;
 
 public class MainCostChart extends AbstractDemoChart {
 
@@ -66,15 +68,36 @@ public class MainCostChart extends AbstractDemoChart {
 			valueMin = 0;
 			valueMax = 10;
 		} else {
-			Arrays.sort(valueArray);
-			valueMin = valueArray[0];
-			valueMax = valueArray[valueArray.length - 1] + 10;
+			double[] valueArray2 = Arrays.copyOf(valueArray, valueArray.length);
+			Arrays.sort(valueArray2);
+			valueMin = valueArray2[0];			
+			valueMax = valueArray2[valueArray2.length - 1] + 10;
+			if (valueMax >= 100 && valueMax < 1000) {
+				valueMax = valueMax + 100;
+			} else if (valueMax >= 1000 && valueMax < 10000) {
+				valueMax = valueMax + 300;
+			} else if (valueMax >= 10000 && valueMax < 100000) {
+				valueMax = valueMax + 500;
+			}
 		}
-		setChartSettings(renderer, "近7天消费记录", "日期", "金额", 1, 7,
+		Log.i(ConfigLoader.TAG, "valueMin:" + valueMin + ", valueMax:" + valueMax);
+		double xvMin = 1, xvMax = 8;
+		if (xArray.length != 0) {
+			xvMin = xArray[0];
+			xvMax = xArray[xArray.length - 1] + 1;
+		}
+		setChartSettings(renderer, "近7天消费记录", "日期", "金额", xvMin, xvMax,
 				valueMin, valueMax, context.getResources().getColor(R.color.cost_today_tcolor)
 				, Color.GRAY); // 设置X,Y坐标最大值
-		renderer.setXLabels(1);
-		renderer.setYLabels(10);
+		//设置X轴近似坐标个数.		
+		renderer.setXLabels(8);
+		//设置Y轴近似坐标个数.
+		renderer.setYLabels(8);
+		//设置X,Y轴最大最小数据
+		renderer.setXAxisMax(xvMax);
+		renderer.setXAxisMin(xvMin);
+		renderer.setYAxisMax(valueMax);
+		renderer.setYAxisMin(valueMin);
 		renderer.setApplyBackgroundColor(true);
 		renderer.setBackgroundColor(context.getResources().getColor(
 				R.color.cost_today_tcolor));

@@ -46,13 +46,19 @@ public class DataManager {
 		return db.insert(map.get(ConfigLoader.TABLE_NAME_KEY).toString(), "", value);
 	}
 	
-	public Object addRecordByBean(Record record) {
+	public Object addRecordByBean(Record record) {		
 		ContentValues value = new ContentValues();
 		
 		value.put("type_id", record.getType_id());
 		value.put("type_name", record.getType_name());
-		value.put("note", record.getNote());		
-		value.put("record_value", record.getRecord_value());
+		value.put("note", record.getNote());
+		
+		double recordValue = record.getRecord_value();
+		if (String.valueOf(recordValue).contains(".")) {
+			DecimalFormat format = new DecimalFormat("#.00");
+			recordValue = Double.parseDouble(format.format(recordValue));
+		}
+		value.put("record_value", recordValue);
 		value.put("recorddate", record.getRecorddate());
 		
 		return db.insert(ConfigLoader.RECORD_TABLE, "", value);

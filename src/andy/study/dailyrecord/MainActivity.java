@@ -45,6 +45,8 @@ public class MainActivity extends Activity {
 	
 	private Button buttomButton;
 	
+	private TextView costTodayCost, costAllTotal, costSummaryWeek, costSummaryMonth, costSummaryHYear, costSummaryYear;
+	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +55,13 @@ public class MainActivity extends Activity {
         
         dm = new DataManager(this);
         costTodayTitle = (TextView) this.findViewById(R.id.cost_today_title);
+        costTodayCost = (TextView) this.findViewById(R.id.costTodayCost);
+        costAllTotal = (TextView) this.findViewById(R.id.costAllTotal);
+        costSummaryWeek = (TextView) this.findViewById(R.id.costSummaryWeek);
+        costSummaryMonth = (TextView) this.findViewById(R.id.costSummaryMonth);
+        costSummaryHYear = (TextView) this.findViewById(R.id.costSummaryHYear);
+        costSummaryYear = (TextView) this.findViewById(R.id.costSummaryYear);
+        
         button = (Button)this.findViewById(R.id.addRecord);
         button.setOnClickListener(new View.OnClickListener() {			
 			@Override
@@ -74,30 +83,42 @@ public class MainActivity extends Activity {
 	    	String sql = "select sum(record_value) from t_daily_record t where datetime(t.recorddate) = datetime(?)";
 	    	String[] args = new String[]{ToolUtils.getDateBySpecFormat("yyyy-MM-dd")};
 	    	Object costToday = dm.findRecordForObject(sql, args);
+//	    	costTodayCost.setText(ToolUtils.getCostString(costToday));
+	    	ToolUtils.setViewText(costTodayCost, costToday);
 	    	
 	    	//总消费记录
 	    	sql = "select sum(record_value) from t_daily_record t ";
 	    	Object costAll = dm.findRecordForObject(sql, null);
+//	    	costAllTotal.setText(ToolUtils.getCostString(costAll));
+	    	ToolUtils.setViewText(costAllTotal, costAll);
 	    	
 	    	//本周消费
 	    	sql = "select sum(record_value) from t_daily_record t where datetime(t.recorddate) >= datetime(?) and datetime(t.recorddate) <= datetime(?)";
 	    	String[] weekArgs = new String[]{ToolUtils.getMondayOfWeek(null), ToolUtils.getSundayOfWeek(null)};
 	    	Object costWeek = dm.findRecordForObject(sql, weekArgs);
+//	    	costSummaryWeek.setText(ToolUtils.getCostString(costWeek));
+	    	ToolUtils.setViewText(costSummaryWeek, costWeek);
 	    	
 	    	//本月消费
 	    	String[] monthArgs = new String[]{ToolUtils.getFirstDayOfMonth(null), ToolUtils.getLastDayOfMonth(null)};
 	    	Object costMonth = dm.findRecordForObject(sql, monthArgs);
+//	    	costSummaryMonth.setText(ToolUtils.getCostString(costMonth));
+	    	ToolUtils.setViewText(costSummaryMonth, costMonth);
 	    	
 	    	//半年消费
 	    	String[] halfArgs = new String[]{ToolUtils.getfirstDayOfHalfYear(), ToolUtils.getLastDayOfHalfYear()};
 	    	Object costHalf = dm.findRecordForObject(sql, halfArgs);
+//	    	costSummaryHYear.setText(ToolUtils.getCostString(costHalf));
+	    	ToolUtils.setViewText(costSummaryHYear, costHalf);
 	    	
 	    	//一年消费
 	    	String[] yearArgs = new String[]{ToolUtils.getFirstDayOfYear(), ToolUtils.getLastDayOfYear()};
 	    	Object costYear = dm.findRecordForObject(sql, yearArgs);
+//	    	costSummaryYear.setText(ToolUtils.getCostString(costYear));
+	    	ToolUtils.setViewText(costSummaryYear, costYear);
 	    	
 	    	Log.i(ConfigLoader.TAG, "today:" + costToday + ", total:" + costAll + ", week:" + costWeek + ", month:" + costMonth + "" +
-	    			", half:" + costHalf + ", year:" + costYear);
+	    			", half:" + costHalf + ", year:" + costYear + ",today:" + ToolUtils.getDateBySpecFormat("yyyy-MM-dd"));
 	    	
 	    	//查找近7天记录
 	    	sql = "select a.recorddate, sum(a.record_value) record_value from (select t.recorddate, t.record_value from t_daily_record t order by t.recorddate desc limit 0, 50 )a group by a.recorddate order by a.recorddate desc limit 0, 7";
