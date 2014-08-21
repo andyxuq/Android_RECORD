@@ -26,6 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import andy.study.dailyrecord.chart.MainCostChart;
 import andy.study.dailyrecord.dao.DataManager;
+import andy.study.dailyrecord.listener.CostTextClickListener;
 import andy.study.dailyrecord.model.Record;
 import andy.study.dailyrecord.util.ActivityAgent;
 import andy.study.dailyrecord.util.ConfigLoader;
@@ -61,6 +62,14 @@ public class MainActivity extends Activity {
         costSummaryMonth = (TextView) this.findViewById(R.id.costSummaryMonth);
         costSummaryHYear = (TextView) this.findViewById(R.id.costSummaryHYear);
         costSummaryYear = (TextView) this.findViewById(R.id.costSummaryYear);
+        
+        CostTextClickListener clickListener = new CostTextClickListener(this, dm);
+        costTodayCost.setOnClickListener(clickListener);
+        costAllTotal.setOnClickListener(clickListener);
+        costSummaryWeek.setOnClickListener(clickListener);
+        costSummaryMonth.setOnClickListener(clickListener);
+        costSummaryHYear.setOnClickListener(clickListener);
+        costSummaryYear.setOnClickListener(clickListener);
         
         button = (Button)this.findViewById(R.id.addRecord);
         button.setOnClickListener(new View.OnClickListener() {			
@@ -198,8 +207,37 @@ public class MainActivity extends Activity {
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
-    
-    private boolean isExist = false;
+       
+    public TextView getCostTodayTitle() {
+		return costTodayTitle;
+	}
+
+	public TextView getCostTodayCost() {
+		return costTodayCost;
+	}
+
+	public TextView getCostAllTotal() {
+		return costAllTotal;
+	}
+
+	public TextView getCostSummaryWeek() {
+		return costSummaryWeek;
+	}
+
+	public TextView getCostSummaryMonth() {
+		return costSummaryMonth;
+	}
+
+	public TextView getCostSummaryHYear() {
+		return costSummaryHYear;
+	}
+
+	public TextView getCostSummaryYear() {
+		return costSummaryYear;
+	}
+
+
+	private boolean isExist = false;
 	private boolean hasTask = false;
 	
 	/** 点击两下退出程序 */
