@@ -13,6 +13,7 @@ import org.achartengine.renderer.XYSeriesRenderer;
 import org.achartengine.renderer.XYSeriesRenderer.FillOutsideLine;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Paint.Align;
 import android.util.Log;
@@ -129,5 +130,10 @@ public class MainCostChart extends AbstractDemoChart {
 
 		XYMultipleSeriesDataset dataset = buildDataset(titles, x, values);
 		return ChartFactory.getLineChartView(context, dataset, renderer);
+	}
+
+	@Override
+	public Intent execute(Context context) {
+		return null;
 	}
 }

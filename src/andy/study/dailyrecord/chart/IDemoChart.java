@@ -35,4 +35,12 @@ public interface IDemoChart {
    */  
   View executeWithView(Context context);
 
+  
+  /**
+   * Executes the chart demo.
+   * 
+   * @param context the context
+   * @return the built intent
+   */
+  Intent execute(Context context);
 }

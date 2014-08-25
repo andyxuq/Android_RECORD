@@ -3,11 +3,14 @@ package andy.study.dailyrecord.listener;
 import java.util.List;
 import java.util.Map;
 
+import android.content.Intent;
+import android.sax.StartElementListener;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Toast;
 import andy.study.dailyrecord.MainActivity;
+import andy.study.dailyrecord.chart.CostDetailChart;
 import andy.study.dailyrecord.dao.DataManager;
 import andy.study.dailyrecord.util.ConfigLoader;
 import andy.study.dailyrecord.util.ToolUtils;
@@ -32,7 +35,7 @@ public class CostTextClickListener implements OnClickListener{
 	public void onClick(View view) {
 		//where datetime(t.recorddate) >= datetime(?) and datetime(t.recorddate) <= datetime(?)
 		String whereCondition = " #where_condition# ";
-		String sql = "select t.type_name, sum(t.record_value) from t_daily_record t " + whereCondition + " group by t.type_name";
+		String sql = "select t.type_name, sum(t.record_value) recordValue from t_daily_record t " + whereCondition + " group by t.type_name";
 		
 		try {
 			List<Map<String, Object>> costList = null;
@@ -55,7 +58,13 @@ public class CostTextClickListener implements OnClickListener{
 				}
 			}
 			costList = dm.findRecord(sql, args);
-			
+			if (costList != null && costList.size() !=0) {
+				CostDetailChart cdc = new CostDetailChart(costList);
+				Intent intent = cdc.execute(activity);
+				activity.startActivity(intent);
+			} else {
+				Toast.makeText(activity, "未获取到详细消费数据", Toast.LENGTH_LONG).show();
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			Log.i(ConfigLoader.TAG, e.getMessage());
