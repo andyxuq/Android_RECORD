@@ -41,8 +41,8 @@ public class AddRecordClickListener implements OnClickListener {
 			}
 			
 			Builder dialog = new AlertDialog.Builder(addRecord);
-			dialog.setTitle("SaveOrContinue");
-			dialog.setMessage("Save\nOr Continue to add a new Record?");
+			dialog.setTitle("Save_Or_Continue");
+			dialog.setMessage("Save Or Continue to add a new record?");
 			dialog.setIcon(R.drawable.ic_launcher);
 			dialog.setPositiveButton("Cancel", new DialogInterface.OnClickListener() {
 				
@@ -60,7 +60,7 @@ public class AddRecordClickListener implements OnClickListener {
 					saveAllRecord();
 				}
 			});
-			dialog.setNeutralButton("Save&Continue", new DialogInterface.OnClickListener() {
+			dialog.setNeutralButton("Continue", new DialogInterface.OnClickListener() {
 				
 				@Override
 				public void onClick(DialogInterface dialog, int which) {

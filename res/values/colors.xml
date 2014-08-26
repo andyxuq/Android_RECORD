@@ -14,10 +14,10 @@
    	<color name="cost_chart_bg">#FFE7E1</color>
    	<color name="cost_chart_line">#FD6138</color>
    	
-   	<color name="cost_chart_01">#3D59AB</color>
-   	<color name="cost_chart_02">#FF6347</color>
-   	<color name="cost_chart_03">#00C78C</color>
-   	<color name="cost_chart_04">#D2691E</color>
-   	<color name="cost_chart_05">#87CEEB</color>
-   	<color name="cost_chart_06">#DA70D6</color>
+   	<color name="cost_chart_01">#666699</color>
+   	<color name="cost_chart_02">#FF9933</color>
+   	<color name="cost_chart_03">#333399</color>
+   	<color name="cost_chart_04">#663399</color>
+   	<color name="cost_chart_05">#336699</color>
+   	<color name="cost_chart_06">#99CC00</color>
 </resources>

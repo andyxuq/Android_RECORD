@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Random;
 
 import org.achartengine.ChartFactory;
 import org.achartengine.model.CategorySeries;
@@ -36,6 +37,8 @@ public class CostDetailChart extends AbstractDemoChart{
 	
 	private double[] chartValues;
 	private double totalValues = 0;
+	
+	private int[] chartColors;
 	public CostDetailChart(double[] chartValues) {
 		this.chartValues = chartValues;
 	}
@@ -63,7 +66,9 @@ public class CostDetailChart extends AbstractDemoChart{
 	    renderer.setShowLabels(true); 	    
 	    renderer.setApplyBackgroundColor(true);
 	    renderer.setBackgroundColor(Color.BLACK);
-	    
+	    renderer.setPanEnabled(false);//设置不能左右上下拖动
+	    renderer.setLabelsTextSize(20);	   
+	    renderer.setLegendTextSize(40);	    
 	    double maxMe = 0;	    
 	    for (double max : chartValues) {
 	    	totalValues += max;
@@ -78,7 +83,7 @@ public class CostDetailChart extends AbstractDemoChart{
 	    	    SimpleSeriesRenderer r = renderer.getSeriesRendererAt(maxIndex);
 	    	    r.setGradientEnabled(true);
 	    	    r.setGradientStart(0, Color.BLUE);
-	    	    r.setGradientStop(0, Color.GREEN);
+	    	    r.setGradientStop(0, Color.MAGENTA);
 	    	    r.setHighlighted(true);
 	    	}
 	    	maxIndex++;
@@ -89,7 +94,7 @@ public class CostDetailChart extends AbstractDemoChart{
 //	    r.setGradientStop(0, Color.GREEN);
 //	    r.setHighlighted(true);
 	    Intent intent = ChartFactory.getPieChartIntent(context,
-	        buildCategoryDataset("Project budget", chartValues), renderer, "Budget");
+	        buildCategoryDataset("Project budget", chartValues), renderer, "消费明细");
 	    return intent;
 	}
 	
@@ -111,23 +116,21 @@ public class CostDetailChart extends AbstractDemoChart{
 	public int[] buildColors(double[] values, Context context) {		
 		int[] colors = new int[values.length];
 		int i = 0;
+		chartColors = new int[]{
+			context.getResources().getColor(R.color.cost_chart_01)
+			,context.getResources().getColor(R.color.cost_chart_02)
+			,context.getResources().getColor(R.color.cost_chart_03)
+			,context.getResources().getColor(R.color.cost_chart_04)
+			,context.getResources().getColor(R.color.cost_chart_05)
+			,context.getResources().getColor(R.color.cost_chart_06)
+		};
+		Random random = new Random();
+		int rNum = random.nextInt(6);
 		for (double value : values) {
-			if ( i==0 ) {
-				colors[i] = context.getResources().getColor(R.color.cost_chart_01);
-			} else if (i == 1) {
-				colors[i] = context.getResources().getColor(R.color.cost_chart_02);
-			} else if (i == 2) {
-				colors[i] = context.getResources().getColor(R.color.cost_chart_03);
-			} else if (i == 3) {
-				colors[i] = context.getResources().getColor(R.color.cost_chart_04);
-			} else if (i == 4) {
-				colors[i] = context.getResources().getColor(R.color.cost_chart_05);
-			} else if (i == 5) {
-				colors[i] = context.getResources().getColor(R.color.cost_chart_06);
-			} else {
-				colors[i] = context.getResources().getColor(R.color.cost_chart_06);
+			if (rNum > 5) {
+				rNum = 0;
 			}
-			i++;
+			colors[i++] = chartColors[rNum++];			
 		}
 		return colors;
 	}

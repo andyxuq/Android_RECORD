@@ -71,7 +71,7 @@ public class MainCostChart extends AbstractDemoChart {
 		} else {
 			double[] valueArray2 = Arrays.copyOf(valueArray, valueArray.length);
 			Arrays.sort(valueArray2);
-			valueMin = valueArray2[0];			
+			valueMin = valueArray2[0] - 10;			
 			valueMax = valueArray2[valueArray2.length - 1] + 10;
 			if (valueMax >= 100 && valueMax < 1000) {
 				valueMax = valueMax + 100;
@@ -126,7 +126,7 @@ public class MainCostChart extends AbstractDemoChart {
 		r.setDisplayChartValues(true); // 设置在上方显示值
 		r.setChartValuesTextSize(20);
 		r.setChartValuesTextAlign(Align.LEFT);
-		r.setLineWidth(3);		//设置线条宽度
+		r.setLineWidth(6);		//设置线条宽度
 
 		XYMultipleSeriesDataset dataset = buildDataset(titles, x, values);
 		return ChartFactory.getLineChartView(context, dataset, renderer);
