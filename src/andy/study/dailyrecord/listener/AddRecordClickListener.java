@@ -28,11 +28,18 @@ public class AddRecordClickListener implements OnClickListener {
 		this.addRecord = addRecord;
 	}
 	
+	/**
+	 * 回到主界面
+	 */
+	public void backToMain() {
+		Intent intent = new Intent(addRecord, MainActivity.class);
+		addRecord.startActivity(intent);
+	}
+	
 	@Override
 	public void onClick(View view) {			
 		if (view == addRecord.getBackButton() || view == addRecord.getBackButton_bottom()) {
-			Intent intent = new Intent(addRecord, MainActivity.class);
-			addRecord.startActivity(intent);				
+			backToMain();
 		} else if (view == addRecord.getSaveButton() || view == addRecord.getSaveButton_bottom()) {
 			if (addRecord.getCostText().getText().toString().trim().equals("")) {					
 //				suggestView.setText(Html.fromHtml("<font color='red'>未填写具体花费</font>"));
@@ -58,6 +65,7 @@ public class AddRecordClickListener implements OnClickListener {
 					Log.i(ConfigLoader.TAG, "You click save button...");
 					
 					saveAllRecord();
+					backToMain();
 				}
 			});
 			dialog.setNeutralButton("Continue", new DialogInterface.OnClickListener() {
@@ -134,6 +142,7 @@ public class AddRecordClickListener implements OnClickListener {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						saveAllRecord();
+						backToMain();
 					}
 				});
 			} else {

@@ -1,8 +1,10 @@
 package andy.study.dailyrecord;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -100,7 +102,7 @@ public class AddRecord extends Activity{
 		
 		StringBuilder builder = new StringBuilder();
 		builder.append(year);
-		builder.append("-" + ((month+1) < 10 ? "0" + (month+1) : (month+1)));
+		builder.append("-" + ((month + 1) < 10 ? "0" + (month + 1) : (month + 1)));
 		builder.append("-" + (day < 10 ? "0" + day : day));
 		showDateView.setText(builder);
 	}
@@ -117,6 +119,7 @@ public class AddRecord extends Activity{
 		((DatePickerDialog)dialog).updateDate(year, month, day);
 	}
 	
+	int dataClickTimes = 0;
 	private void initDataView() {		
 		String dateToday = ToolUtils.getDateBySpecFormat("yyyy-MM-dd");
 		String[] dateArray = dateToday.split("-");
@@ -128,6 +131,9 @@ public class AddRecord extends Activity{
 			@Override
 			public void onClick(View view) {
 				showDateView.setVisibility(TextView.INVISIBLE);
+				if (dataClickTimes++ == 0) {
+					AddRecord.this.month = AddRecord.this.month - 1; 
+				}
 				showDialog(showDateView.getId());
 			}
 		});
@@ -184,7 +190,7 @@ public class AddRecord extends Activity{
 //			}
 //		}
 		
-		Set<String> spinnerList = new HashSet<String>();
+		Set<String> spinnerList = new LinkedHashSet<String>();
 		for (Map<String, Object> map : ConfigLoader.SPINNER_LIST) {
 			spinnerList.add(map.get("type_name").toString());
 		}
@@ -205,7 +211,8 @@ public class AddRecord extends Activity{
 			if (null == costValueText || "".equals(costValueText)) {
 				return null;
 			}
-			float record_value = Float.parseFloat(costValueText);
+			DecimalFormat format = new DecimalFormat("#.00");
+			float record_value = Float.parseFloat(format.format(Float.parseFloat(costValueText)));
 			String note = noteText.getText().toString();
 			String date = showDateView.getText().toString();
 			
