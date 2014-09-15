@@ -18,6 +18,8 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -202,12 +204,6 @@ public class MainActivity extends Activity {
 		}
 	};
     
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-       
     public TextView getCostTodayTitle() {
 		return costTodayTitle;
 	}
@@ -236,6 +232,23 @@ public class MainActivity extends Activity {
 		return costSummaryYear;
 	}
 
+	
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+       
+	
+	@Override
+	public boolean onMenuItemSelected(int featureId, MenuItem item) {
+		if (item.getItemId() == R.id.menu_show_detail) {
+			Intent intent = new Intent(MainActivity.this, CostDetail.class);
+			startActivity(intent);
+		}
+		return super.onMenuItemSelected(featureId, item);
+	}
 
 	private boolean isExist = false;
 	private boolean hasTask = false;

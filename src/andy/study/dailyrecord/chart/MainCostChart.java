@@ -124,7 +124,7 @@ public class MainCostChart extends AbstractDemoChart {
 		line.setColor(context.getResources().getColor(R.color.cost_chart_bg));
 		r.addFillOutsideLine(line);
 		r.setDisplayChartValues(true); // 设置在上方显示值
-		r.setChartValuesTextSize(20);
+		r.setChartValuesTextSize(40);
 		r.setChartValuesTextAlign(Align.LEFT);
 		r.setLineWidth(6);		//设置线条宽度
 

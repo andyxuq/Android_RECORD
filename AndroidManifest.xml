@@ -27,6 +27,7 @@
         </activity>
         <activity android:name=".AddRecord"></activity>
         <activity android:name=".AddRecord2"></activity>
+        <activity android:name=".CostDetail"></activity>
         <activity android:name="org.achartengine.GraphicalActivity" ></activity>
     </application>
 

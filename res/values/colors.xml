@@ -20,4 +20,6 @@
    	<color name="cost_chart_04">#663399</color>
    	<color name="cost_chart_05">#336699</color>
    	<color name="cost_chart_06">#99CC00</color>
+   	
+   	<color name="cost_date">#3CA0D9</color>
 </resources>

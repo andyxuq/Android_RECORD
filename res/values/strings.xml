@@ -37,4 +37,6 @@
 	    <item >娱乐</item>
 	    <item >其它</item>
 	</string-array>
+	
+	<string name="menu_show_name">查看消费明细</string>
 </resources>
