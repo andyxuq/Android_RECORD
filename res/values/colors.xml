@@ -22,4 +22,12 @@
    	<color name="cost_chart_06">#99CC00</color>
    	
    	<color name="cost_date">#3CA0D9</color>
+   	
+   	<color name="cost_detail_date">#CEE3EC</color>
+   	<color name="cost_detail_list">#E4EBEA</color>
+   	<color name="cost_detail_info">#12F853</color>
+   	<color name="cost_detail_warning">#FEF854</color>
+   	<color name="cost_detail_error">#FF384F</color>
+   	<color name="cost_detail_delete_pressed">#7CD295</color>
+   	<color name="cost_detail_delete_unpressed">#000000</color>
 </resources>

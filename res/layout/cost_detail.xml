@@ -5,7 +5,9 @@
     android:orientation="vertical" >
     
 	<LinearLayout android:layout_width="match_parent"
-	    android:layout_height="wrap_content"
+	    android:layout_height="0dp"
+	    android:layout_weight="1"
+	    android:background="@color/cost_detail_date"
 	    android:orientation="horizontal">
 	    <TextView android:layout_width="0dp"
 	        android:layout_weight="2"
@@ -14,18 +16,25 @@
 	        android:textSize="30sp"/>
 	    <TextView android:layout_width="0dp"
 	        android:id="@+id/costDetailDate"
-	        android:layout_weight="4"
+	        android:layout_weight="6"
 	        android:textColor="@color/cost_date"
 	        android:layout_height="wrap_content"
 	        android:textSize="30sp"/>
 	</LinearLayout>
 	
 	<ScrollView android:layout_width="match_parent"
-	    android:layout_height="wrap_content">
+	    android:layout_height="0dp"
+	    android:layout_weight="7"
+	    android:padding="2dp"
+	    android:background="@color/cost_detail_list"
+	    >
 	    <LinearLayout android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	    	android:id="@+id/costDetailPanel"
-	    	android:orientation="vertical">
+	    	android:orientation="vertical"
+	    
+	    	
+	    	>
 	        
 	    </LinearLayout>
 	</ScrollView>
