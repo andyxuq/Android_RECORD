@@ -244,7 +244,7 @@ public class MainActivity extends Activity {
 	@Override
 	public boolean onMenuItemSelected(int featureId, MenuItem item) {
 		if (item.getItemId() == R.id.menu_show_detail) {
-			Intent intent = new Intent(MainActivity.this, CostDetail.class);
+			Intent intent = new Intent(MainActivity.this, CostList.class);
 			startActivity(intent);
 		}
 		return super.onMenuItemSelected(featureId, item);

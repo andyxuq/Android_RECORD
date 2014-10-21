@@ -39,4 +39,5 @@
 	</string-array>
 	
 	<string name="menu_show_name">查看消费明细</string>
+	<string name="cost_list_more">加载更多...</string>
 </resources>

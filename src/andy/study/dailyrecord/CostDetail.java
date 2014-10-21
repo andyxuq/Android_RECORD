@@ -43,6 +43,8 @@ public class CostDetail extends Activity{
 	private TextView dateText;
 	private LinearLayout detailPanel;
 	
+	private TextView totalCost;
+	
 	private DataManager dm;
 	
 	private int year,month,day;
@@ -55,9 +57,14 @@ public class CostDetail extends Activity{
 		dm = new DataManager(this);
 		dateText = (TextView) this.findViewById(R.id.costDetailDate);
 		detailPanel = (LinearLayout) this.findViewById(R.id.costDetailPanel);
-		initDataView();
+		totalCost = (TextView)this.findViewById(R.id.costDetailCost);
 		
-		initCostDetail();
+		Intent intent = this.getIntent();		
+		String date = intent.getStringExtra("date");
+		String value = intent.getStringExtra("value");
+		
+		initDataView(date, value);		
+		initCostDetail(value);
 	}
 	
 	private DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
@@ -80,7 +87,7 @@ public class CostDetail extends Activity{
 		builder.append("-" + (day < 10 ? "0" + day : day));
 		dateText.setText(builder);
 		
-		initCostDetail();
+		initCostDetail("-1");
 	}
 		
 	@Override
@@ -96,13 +103,17 @@ public class CostDetail extends Activity{
 	}
 	
 	int dataClickTimes = 0;
-	private void initDataView() {		
+	private void initDataView(String date, String value) {		
 		String dateToday = ToolUtils.getDateBySpecFormat("yyyy-MM-dd");
+		if (null != date || !"".equals(date)) {
+			dateToday = date;
+		}
 		String[] dateArray = dateToday.split("-");
 		this.year = Integer.parseInt(dateArray[0]);
 		this.month = Integer.parseInt(dateArray[1]);
 		this.day = Integer.parseInt(dateArray[2]);
 		dateText.setText(dateToday);
+		totalCost.setText("共：" + value);
 		dateText.setOnClickListener(new View.OnClickListener() {			
 			@Override
 			public void onClick(View view) {
@@ -115,7 +126,7 @@ public class CostDetail extends Activity{
 		});
 	}
 	
-	public void initCostDetail() {
+	public void initCostDetail(String value) {
 		detailPanel.removeAllViews();
 		detailPanel.invalidate();
 		String sql = "select * from t_daily_record t where datetime(t.recorddate) = datetime(?) order by t.id asc";		
@@ -125,6 +136,14 @@ public class CostDetail extends Activity{
 		for (Record record : recordList) {
 			appCostDetail(record);
 		}
+		
+		if ("-1".equals(value)) {
+			sql = "select sum(record_value) records from t_daily_record t where datetime(t.recorddate) = datetime(?)";
+			Object records = dm.findRecordForObject(sql, new String[]{date});
+			
+			totalCost.setText("共：" + records.toString());
+		}
+		
 	}
 	
 	public void appCostDetail(Record record) {		
@@ -225,7 +244,7 @@ public class CostDetail extends Activity{
 						Log.i(ConfigLoader.TAG, "delete result : " + dm.deleteRecord(map));
 						Toast.makeText(CostDetail.this, "删除成功", Toast.LENGTH_LONG).show();
 						
-						CostDetail.this.initCostDetail();
+						CostDetail.this.initCostDetail("-1");
 					} catch (Exception e) {
 						e.printStackTrace();
 						Log.i(ConfigLoader.TAG, "delete result error:" + e.getMessage());

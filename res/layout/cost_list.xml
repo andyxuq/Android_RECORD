@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <LinearLayout
+        android:id="@+id/cost_list_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" >
+
+       <Button
+            android:id="@+id/buttonMore"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"         
+            android:text="@string/cost_list_more"
+            android:textColor="@color/add_record_new" />
+    </LinearLayout>
+    
+	<ScrollView 
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_above="@id/cost_list_bottom">
+	    <LinearLayout android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:id="@+id/costListPanel"
+	        android:orientation="vertical">
+	        
+	    </LinearLayout>
+	</ScrollView>
+</RelativeLayout>
